@@ -7,3 +7,7 @@
 body{
     font-family: 'Lato', 'sans-serif';
 }
+
+.link{
+    text-decoration: none;
+}
