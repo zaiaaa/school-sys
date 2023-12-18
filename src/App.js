@@ -8,6 +8,15 @@ import {
 } from 'react-router-dom'
 import { Home } from './pages/home/home';
 
+// Importe os pacotes necessários
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+//import { fab } from '@fortawesome/free-brands-svg-icons';
+
+// Adicione os ícones ao library
+library.add(faChevronUp, faChevronDown);
+
+
 
 function App() {
   return (
