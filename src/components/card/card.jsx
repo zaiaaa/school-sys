@@ -36,9 +36,6 @@ const Card = ({roomClass, room = [],}) => {
     }, [room])
 
     
-    console.log(showDetails)
-    console.log(students)
-
     return (   
     
     !showDetails ? (

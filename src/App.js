@@ -8,9 +8,12 @@ import {
 } from 'react-router-dom'
 import { Home } from './pages/home/home';
 
+import { AuthContextProvider } from './context/auth';
+
 // Importe os pacotes necessários
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { Login } from './pages/login/login';
 //import { fab } from '@fortawesome/free-brands-svg-icons';
 
 // Adicione os ícones ao library
@@ -22,9 +25,12 @@ function App() {
   return (
     <div className="App">
        <Router>
-        <Routes>
-          <Route path='/' element={<Home />}></Route>
-        </Routes>
+        <AuthContextProvider>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/login' element={<Login />}/>
+          </Routes>
+        </AuthContextProvider>
        </Router>
     </div>
   );

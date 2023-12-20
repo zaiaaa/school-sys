@@ -1,18 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Card } from '../../components/card/card'
 import { Header } from '../../components/header/header'
 import './style.css'
 import { api } from "../../services/api";
 import { NewsContainer } from '../../components/newsContainer/newsContainer';
 import foto from "../../assets/volta as aulas.jpg"
+import { AuthContext } from '../../context/auth';
+
 
 
 const Home = () => {
+    
+    const { user } = useContext(AuthContext)
+
+
     document.title = 'EduSIS | Home'
 
     const [room, setRoom] = useState([])
+    const [studentLogged, setStudentLogged] = useState({})
+
+    console.log(user)
 
     useEffect(() => {
+
+        const fetchUserLog = async () =>{
+            
+            if(user.length > 0){
+                try {
+                    const fetching = await api.get(`students/${user.rm}`)
+                    const genStudentLogged = fetching.data 
+                    
+                    setStudentLogged(genStudentLogged)
+                } catch (error) {
+                    alert(error)
+                }
+            }else{
+                return
+            }
+
+
+        }
+        
         
         const fetchData = async () => {
             try{
@@ -24,12 +52,12 @@ const Home = () => {
                 console.log('erro - ', e)
             }
         }
-
+        
+        fetchUserLog()
         fetchData()
     }, [])
 
-    
-    console.log(room)
+    console.log(studentLogged)
 
     const title = "Volta às aulas!"
     const txt = `Caros alunos, professores e equipe,
@@ -50,6 +78,10 @@ const Home = () => {
         <main>
             <NewsContainer img={foto} title={title} txt={txt}/>
             <div className='div-section'>     
+                {
+                    user.length > 0 ? <p>olá {user.email}</p> : ''
+                }
+                
                 {
                     room.map(item => {
                             return <Card key={item.id} roomClass={item.name + ' - ' + item.serie + 'º ano'} room={item.id} classe={""}></Card>
