@@ -19,27 +19,24 @@ const Home = () => {
     const [room, setRoom] = useState([])
     const [studentLogged, setStudentLogged] = useState({})
 
-    console.log(user)
-
     useEffect(() => {
 
         const fetchUserLog = async () =>{
-            
-            if(user.length > 0){
+                
                 try {
-                    const fetching = await api.get(`students/${user.rm}`)
-                    const genStudentLogged = fetching.data 
-                    
-                    setStudentLogged(genStudentLogged)
+                    if(user.rm){
+                        const fetching = await api.get(`students/${user.rm}`)
+                        const genStudentLogged = fetching.data 
+                        
+                        setStudentLogged(genStudentLogged)
+                    }else{
+                        setStudentLogged({})
+                    }
+
                 } catch (error) {
                     alert(error)
                 }
-            }else{
-                return
             }
-
-
-        }
         
         
         const fetchData = async () => {
@@ -58,6 +55,7 @@ const Home = () => {
     }, [])
 
     console.log(studentLogged)
+    console.log(user)
 
     const title = "Volta às aulas!"
     const txt = `Caros alunos, professores e equipe,
@@ -79,7 +77,7 @@ const Home = () => {
             <NewsContainer img={foto} title={title} txt={txt}/>
             <div className='div-section'>     
                 {
-                    user.length > 0 ? <p>olá {user.email}</p> : ''
+                    user ? <p>olá {user.email}</p> : ''
                 }
                 
                 {

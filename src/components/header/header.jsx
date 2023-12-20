@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import './style.css'
 
+//TODO caso o usuario esteja logado, esconda e mostre funções que só quem está logado pode fazer
+
+
 const Header = () => {
     return(
         <div className='navbar'>
