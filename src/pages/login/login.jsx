@@ -16,7 +16,6 @@ const schema = yup.object({
 
 
 //TODO estilizar a página de login
-//TODO 
 
 
 const Login = () => {
