@@ -17,7 +17,6 @@ const schema = yup.object({
 
 //TODO estilizar a página de login
 
-
 const Login = () => {
   
 
@@ -35,6 +34,7 @@ const Login = () => {
 
 const onSubmit = async (formData) => {
   handleLogin(formData)
+  console.log(formData)
 }
   
   return (

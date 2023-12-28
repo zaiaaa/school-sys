@@ -7,7 +7,7 @@ import './style.css'
 const Header = () => {
     return(
         <div className='navbar'>
-            <h2>EduSIS - Luminova</h2>
+            <Link to={'/'}>EduSIS - Luminova</Link>
 
             <ul>
                 <li><Link className='link'>Salas</Link></li>

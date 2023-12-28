@@ -79,12 +79,11 @@ const Home = () => {
                 {
                     user ? <p>olá {user.email}</p> : ''
                 }
-                
                 {
-                    room.map(item => {
+                    room.length !== 0 ? room.map(item => {
                             return <Card key={item.id} roomClass={item.name + ' - ' + item.serie + 'º ano'} room={item.id} classe={""}></Card>
-                        })  
-                }            
+                        }) : "tem nada aqui nao"
+                }       
             </div>
         </main>
         </>
