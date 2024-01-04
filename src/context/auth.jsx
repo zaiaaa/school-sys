@@ -17,23 +17,42 @@ export const AuthContextProvider = ({children}) => {
         try{
             const {data} = await api.get(`logUser?rm=${loginData.rm}&password=${loginData.password}`, {
                 headers: {
-                  'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR3VzdGF2byIsImVtYWlsIjoiMDAwMDAwIiwiaWF0IjoxNzAzNzQ1MTE5fQ.NNv2OCzOuobuCBDiEbe7s-f60YyQtlxVdBUpM9Ri2Jc`
+                  'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`
                 }
               })
-            console.log("resposta: ", data)
-            if(data && data.length > 0){
-                setUser(data[0])
+              
+            if(data && data.rm){
+                console.log(data.rm)
+                localStorage.setItem("rm", data.rm)
+                localStorage.setItem("email", data.email)
+                localStorage.setItem("expiresIn", data.exp)
+                
+                setUser({
+                    rm: localStorage.getItem("rm"),
+                    email: localStorage.getItem("email"),
+                    expiresIn: localStorage.getItem("expiresIn")
+                })
+
+                console.log(user)
                 navigate('/')
             }else{
                 alert('email ou senha inválidos')
+                setUser({})
             }
         }catch(e){
             alert('erro -> ', e)
         }
     }
 
+    const logoff = () => {
+        localStorage.clear()
+        setTimeout(() => {
+            setUser({});
+          }, 0);
+    }
 
-    return (<AuthContext.Provider value={{user, handleLogin}}>
+
+    return (<AuthContext.Provider value={{user, setUser, handleLogin, logoff}}>
         {children}
        </AuthContext.Provider>)
 }

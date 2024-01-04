@@ -11,33 +11,12 @@ import { AuthContext } from '../../context/auth';
 
 const Home = () => {
     
-    const { user } = useContext(AuthContext)
-
+    const { user, setUser } = useContext(AuthContext)
 
     document.title = 'EduSIS | Home'
 
     const [room, setRoom] = useState([])
-    const [studentLogged, setStudentLogged] = useState({})
-
-    useEffect(() => {
-
-        const fetchUserLog = async () =>{
-                
-                try {
-                    if(user.rm){
-                        const fetching = await api.get(`students/${user.rm}`)
-                        const genStudentLogged = fetching.data 
-                        
-                        setStudentLogged(genStudentLogged)
-                    }else{
-                        setStudentLogged({})
-                    }
-
-                } catch (error) {
-                    alert(error)
-                }
-            }
-        
+    useEffect(() => {        
         
         const fetchData = async () => {
             try{
@@ -50,13 +29,14 @@ const Home = () => {
             }
         }
         
-        fetchUserLog()
+        setUser({
+            rm: localStorage.getItem("rm"),
+            email: localStorage.getItem("email"),
+            expiresIn: localStorage.getItem("expiresIn")
+        })
+        
         fetchData()
     }, [])
-
-    console.log(studentLogged)
-    console.log(user)
-
     const title = "Volta às aulas!"
     const txt = `Caros alunos, professores e equipe,
 

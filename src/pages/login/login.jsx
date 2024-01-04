@@ -7,21 +7,29 @@ import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup" 
 import { AuthContext } from '../../context/auth'
 
-
-
 const schema = yup.object({
   rm: yup.string().required('Campo obrigatório').min(6, "Um RM é composto por 6 dígitos.").max(6, "Um RM é composto por 6 dígitos."),
   password: yup.string().required('Campo obrigatório').min(3, "No mínimo 6 caracteres")
 }).required()
 
 
+
+
+const userLogado = {
+  rm: localStorage.getItem("rm"),
+  email: localStorage.getItem("email"),
+  expiresIn: localStorage.getItem("expiresIn")
+}
+
+//console.log(userLogado)
+
 //TODO estilizar a página de login
 
 const Login = () => {
-  
 
-  
-  const {handleLogin} = useContext(AuthContext)
+  const {handleLogin, user} = useContext(AuthContext)
+
+  console.log(user)
 
   const {
       control,
