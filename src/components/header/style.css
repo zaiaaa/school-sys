@@ -10,10 +10,16 @@
     align-items: center;    
 }
 
-.navbar h2{
-    cursor: default;
+.navbar .logo{
+    cursor: pointer;
+    color: #000;
+    font-size: 22px;
+    text-decoration: none;
 }
 
+.navbar .logo:hover{
+    text-decoration: underline;
+}
 
 .navbar ul{
     display: flex;

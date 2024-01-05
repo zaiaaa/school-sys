@@ -1,0 +1,30 @@
+.ct-alert{
+    width: 100%;
+    height: 0;
+    position: relative;
+}
+
+.alert{
+    padding: 1rem;
+
+    background-color: #9b111e;
+    color: #fff;
+    border-radius: 10px;
+
+    position: absolute;
+    bottom: 0;
+
+    left: 50%; /* Posicione o elemento no meio horizontalmente */
+    transform: translateX(-50%); /* Centralize o elemento horizontalmente */
+
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

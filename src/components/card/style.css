@@ -1,75 +1,9 @@
-.card{
+.cardg{
     background-color: #08bdbd;
-    width: 60%;
-    height: 8%;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Aumenta ainda mais a sombra quando o mouse está sobre o card */
+    transition: box-shadow 0.3s ease-in-out; /* Adiciona uma transição suave à sombra */
+    margin: 1rem;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 1rem 3rem;
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    transition: .5s;
-
-    color: #fff;
-}
-
-.card .header{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.card .student{
-    display: none;
-}
-
-.card .details{
-    display: none;
-}
-
-.card .header span{
-    transition: .3s;
-    transform: rotate(0deg);
-}
-
-.open .details{
-    width: 100%;
-    padding: 1rem 0;
-    display: block;
-}
-
-.open .student{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.open .student li{
-    margin: 5px 0;    
-    list-style: none;
-}
-
-.open .header span{
-    transition: .3s;
-    transform: rotate(-180deg);
-}
-
-
-
-
-
-.card:hover{
-    transition: .5s;
-    
-    opacity: .8;
-}
-
-span{
-    font-size: 22px;
 }

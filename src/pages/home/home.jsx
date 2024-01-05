@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Card } from '../../components/card/card'
+import { Card } from '../../components/card-salas/card'
 import { Header } from '../../components/header/header'
 import './style.css'
 import { api } from "../../services/api";

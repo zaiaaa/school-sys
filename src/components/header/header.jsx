@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { api } from '../../services/api';
 import { Dropdown } from '../dropdown/dropdown';
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -53,7 +53,7 @@ const Header = () => {
 
     return(
         <div className='navbar'>
-            <Link to={'/'}>EduSIS - Luminova</Link>
+            <Link to={'/'} className='logo'>EduSIS - Luminova</Link>
 
             <ul>
                 <li><Link className='link'>Salas</Link></li>
@@ -68,7 +68,7 @@ const Header = () => {
                     <Dropdown children={
                     <>
                         <li className="dropdown-li"><FontAwesomeIcon icon={faUser}/> Sua conta</li>
-                        <li onClick={() => { logoff(); setIsDropdownOpen(false) }} className="dropdown-li"><FontAwesomeIcon icon={faRightFromBracket}/> Sair</li>
+                        <li onClick={() => { logoff(); setIsDropdownOpen(false) }} className="dropdown-li"><FontAwesomeIcon icon={faArrowRightFromBracket}/> Sair</li>
                     </>
                 }/>
                 )}

@@ -6,10 +6,17 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup" 
 import { AuthContext } from '../../context/auth'
+import { CardG } from '../../components/card/card'
+import { Alert } from '../../components/alert/alert'
+import "./style.css"
+import telaLogin from "../../assets/telaLogin.svg"
+import { Button } from '../../components/button/button'
+import { Link } from 'react-router-dom'
+
 
 const schema = yup.object({
   rm: yup.string().required('Campo obrigatório').min(6, "Um RM é composto por 6 dígitos.").max(6, "Um RM é composto por 6 dígitos."),
-  password: yup.string().required('Campo obrigatório').min(3, "No mínimo 6 caracteres")
+  password: yup.string().required('Campo obrigatório').min(6, "Senha com no mínimo 6 caracteres")
 }).required()
 
 
@@ -50,15 +57,23 @@ const onSubmit = async (formData) => {
         <Header />
         
         <section>
-            <div className="card-login">
-                <h2>Faça Login</h2>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input name={"rm"} errorMessage={errors?.rm?.message} control={control} placeholder="RM"/>
-                    <Input name={"password"} errorMessage={errors?.password?.message} control={control} placeholder="Senha" type="password"/>
-                    <button type="submit">Entrar</button>
-                </form>
+          <CardG>
+            <div className='image'>
+              <img src={telaLogin} alt="" srcset="" />
             </div>
+            <div className="card-login">
+              {errors?.password?.message && !errors?.rm?.message? <Alert open={"show"} errorMessage={errors?.password?.message}/> : null}
+              {errors?.rm?.message? <Alert open={"show"} errorMessage={errors?.rm?.message}/> : null}
+                <h1>Faça Login</h1>
+                <p>Veja suas notas, aulas e muito mais!</p>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input className={"input"} name={"rm"} control={control} placeholder="RM"/>
+                    <Input className={"input"} name={"password"} control={control} placeholder="Senha" type="password"/>
+                    <Button type={'submit'} text={'Entrar'} variant={'orange'}/>
+                </form>
+                <Link to={'/cadaster'}>Ainda não tenho uma conta</Link>
+            </div>
+          </CardG>
         </section>
     </>
   )

@@ -14,6 +14,7 @@ import { AuthContextProvider } from './context/auth';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Login } from './pages/login/login';
+import { Cadaster } from './pages/cadaster/cadaster';
 //import { fab } from '@fortawesome/free-brands-svg-icons';
 
 // Adicione os ícones ao library
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}></Route>
             <Route path='/login' element={<Login />}/>
+            <Route path='/cadaster' element={<Cadaster />}/>
           </Routes>
         </AuthContextProvider>
        </Router>
