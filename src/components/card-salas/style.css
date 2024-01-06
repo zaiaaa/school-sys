@@ -8,6 +8,9 @@
     justify-content: space-around;
     padding: 1rem 3rem;
     border-radius: 6px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out; /* Adiciona uma transição suave à sombra */
 
     cursor: pointer;
 

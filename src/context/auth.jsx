@@ -35,12 +35,12 @@ export const AuthContextProvider = ({children}) => {
 
                 console.log(user)
                 navigate('/')
-            }else{
+            }else if(data.length == 0){
                 alert('email ou senha inválidos')
                 setUser({})
             }
         }catch(e){
-            alert('erro -> ', e)
+            alert('Login errado', e)
         }
     }
 

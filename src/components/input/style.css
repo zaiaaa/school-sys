@@ -4,4 +4,5 @@ input{
     padding: .5rem;
     border-radius: 5px;
     border: 2px solid black;
+    outline: 1px solid #ff9914;
 }
