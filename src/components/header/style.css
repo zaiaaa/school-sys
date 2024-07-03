@@ -1,18 +1,21 @@
 .navbar{
     width: 100%;
     height: 3.5rem;
-    background-color: #ff9914;
+    background-color: #1d2121;
     padding: .5rem;
 
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;    
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar .logo{
     cursor: pointer;
-    color: #000;
+    color: #ffffff;
     font-size: 22px;
     text-decoration: none;
 }
@@ -33,7 +36,7 @@ ul li{
 }
 
 .navbar .link{
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .navbar .link:hover{

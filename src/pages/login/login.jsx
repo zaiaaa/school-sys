@@ -20,14 +20,6 @@ const schema = yup.object({
 }).required()
 
 
-
-
-const userLogado = {
-  rm: localStorage.getItem("rm"),
-  email: localStorage.getItem("email"),
-  expiresIn: localStorage.getItem("expiresIn")
-}
-
 //console.log(userLogado)
 
 //TODO estilizar a página de login

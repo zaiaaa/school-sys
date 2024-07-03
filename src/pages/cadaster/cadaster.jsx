@@ -30,8 +30,10 @@ const Cadaster = () => {
   const [errorRm, setErrorRm] = useState('')
   const [success, setSuccess] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [passwordMatch, setPasswordMatch] = useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
+  const [able, setAble] = useState(false)
+  const [rmOk, setRmOk] = useState(false)
+  const [acc, setAcc] = useState([])
 
   const {
     control,
@@ -59,12 +61,53 @@ const onSubmit = async (formData) => {
 const handleSearchClick = async () => {
   const rmValue = watch('rm')
   if(rmValue.length === 6){
+    const haveAcc = await api.get(`users/${rmValue}`)
     const studentsFound = await api.get(`students/${rmValue}`)
     console.log(`students/${rmValue}`)
+    console.log(haveAcc)
+    setAcc(haveAcc.data)
     setStudents(studentsFound.data)
+    setAble(true)
+    setRmOk(true)
+    
+  }else{
+    setAble(false)
+    setRmOk(false)
   }
-
 }
+
+useEffect(() => {
+  if(acc.length > 0){
+    setErrorRm("Usuário já cadastrado.")
+    setAble(false)
+    setRmOk(true)
+    setCanSubmit(false)
+    setValue('rm', '')
+  }
+}, [acc])
+
+useEffect(() => {  
+    if(students.length === 0){
+      setErrorRm("Rm inválido.")
+      setCanSubmit(false)
+      setValue('rm', '')
+      setAble(false)
+      setRmOk(true)
+      setTimeout(() => {
+        setErrorRm('')
+      }, 3000);
+    }
+
+    if(students.length > 0 && acc.length == 0){
+      setSuccess("Aluno encontrado!")
+      setCanSubmit(true)
+      setAble(true)
+      setRmOk(false)
+      setTimeout(() => {
+        setSuccess('')
+      }, 3000);
+    }
+  }, [students])
 
 const handlePasswordChange = () => {
   setShowPassword(!showPassword)
@@ -76,44 +119,24 @@ useEffect(() => {
     const senha = watch("password")
     const confPass = watch("confirmPassword")
 
-    if(senha == confPass && senha){
+    if(senha === confPass && (senha && confPass)){
       setSuccess("As senhas combinam.")
       setCanSubmit(true)
       setTimeout(() => {
         setSuccess("")
       }, 3000);
-      setPasswordMatch(true)
     }else{
       setErrorRm("As senhas não batem")
       setCanSubmit(false)
       setTimeout(() => {
         setErrorRm("")
-      }, 3000);
-
-      setPasswordMatch(false)
+      }, 1000);
     }
   }
   IsPasswordValid()
 }, [watch("confirmPassword")])
 
-useEffect(() => {  
-    if(students.length === 0){
-      setErrorRm("Rm inválido.")
-      setCanSubmit(false)
-      setValue('rm', '')
-      setTimeout(() => {
-        setErrorRm('')
-      }, 3000);
-    }
-
-    if(students.length > 0){
-      setSuccess("Aluno encontrado!")
-      setCanSubmit(true)
-      setTimeout(() => {
-        setSuccess('')
-      }, 3000);
-    }
-  }, [students])
+  console.log(able)
   
   return (
     <>
@@ -130,15 +153,15 @@ useEffect(() => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <p >Verifique se você é um aluno.</p>
           <div className='isValid'>
-            <Input maxLength="6" className="input" name={"rm"} control={control} placeholder="RM"></Input>
+            <Input maxLength="6" className="input" name={"rm"} control={control} placeholder="RM" readOnly={!rmOk}></Input>
             <Button type={"button"} variant={"orange"} text={<FontAwesomeIcon icon={faSearch}/>} onClick={handleSearchClick}></Button>
           </div>
-          <Input type={"email"} name={"email"} control={control} placeholder="Email"></Input>
+          <Input type={"email"} name={"email"} control={control} placeholder="Email" disabled={!able}></Input>
           <div className='ct-password'>
-            <Input type={showPassword ? "text" : "password"} name={"password"} control={control} placeholder="Senha"></Input>
+            <Input type={showPassword ? "text" : "password"} name={"password"} control={control} placeholder="Senha" disabled={!able}></Input>
             <Button className="eye" variant={"blue"} onClick={handlePasswordChange} text={<FontAwesomeIcon icon={faEye}/>}></Button>
           </div>
-          <Input type={"password"} control={control} name={"confirmPassword"} placeholder="Confirme sua senha"/>
+          <Input type={"password"} control={control} name={"confirmPassword"} placeholder="Confirme sua senha" disabled={!able}/>
           <Button type={isValid && canSubmit ? "submit" : "button"} text={"Entrar"} variant={isValid && canSubmit ? "orange" : "disabled"}></Button>
         </form>
       </div>

@@ -5,7 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { api } from "../../services/api";
 
 
-const Card = ({roomClass, room = [],}) => {
+const Card = ({roomClass, room = []}) => {
   
     const [students, setStudents] = useState([])
 

@@ -19,13 +19,9 @@ const Header = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [name, setName] = useState('')
 
-
-    console.log(user)
-
     useEffect(() => {
         const getStudent = async () => {
             try {
-                console.log(user.rm); // Certifique-se de que user.rm é uma propriedade válida
                 if(user && user.rm){
                     const aluno = await api.get(`students/${user.rm}`);  // Certifique-se de que a chamada à API está configurada corretamente
                     setStudent(aluno);
@@ -56,7 +52,7 @@ const Header = () => {
             <Link to={'/'} className='logo'>EduSIS - Luminova</Link>
 
             <ul>
-                <li><Link className='link'>Salas</Link></li>
+                <li><Link to={'/salas'} className='link'>Salas</Link></li>
                 <li><Link className='link'>Alunos</Link></li>
                 
                 {!user.rm ?( <li><Link className='link' to={'/login'}>Entrar</Link></li> 
@@ -67,7 +63,7 @@ const Header = () => {
                 {isDropdownOpen && (
                     <Dropdown children={
                     <>
-                        <li className="dropdown-li"><FontAwesomeIcon icon={faUser}/> Sua conta</li>
+                        <li className="dropdown-li"><Link to={"/conta"}><FontAwesomeIcon icon={faUser}/> Sua conta</Link></li>
                         <li onClick={() => { logoff(); setIsDropdownOpen(false) }} className="dropdown-li"><FontAwesomeIcon icon={faArrowRightFromBracket}/> Sair</li>
                     </>
                 }/>

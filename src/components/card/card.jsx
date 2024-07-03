@@ -1,9 +1,9 @@
 import React from 'react'
 import "./style.css"
 
-const CardG = ({children}) => {
+const CardG = ({children, className}) => {
   return (
-    <div className='cardg'>
+    <div className={`cardg ${className}`}>
         {children}
     </div>
   )

@@ -1,9 +1,9 @@
 .cardg{
-    background-color: #08bdbd;
+    background-color: #738383;
     border-radius: 8px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Aumenta ainda mais a sombra quando o mouse está sobre o card */
     transition: box-shadow 0.3s ease-in-out; /* Adiciona uma transição suave à sombra */
-    margin: 1rem;
+    margin: 4rem 1rem;
     padding: 1rem;
     display: flex;
 }

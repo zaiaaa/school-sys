@@ -5,13 +5,14 @@ import './style.css'
 import { api } from "../../services/api";
 import { NewsContainer } from '../../components/newsContainer/newsContainer';
 import foto from "../../assets/volta as aulas.jpg"
+import { Carousel } from '../../components/carousel/carousel';
 import { AuthContext } from '../../context/auth';
 
 
 
 const Home = () => {
     
-    const { user, setUser } = useContext(AuthContext)
+    const { user, isAuth } = useContext(AuthContext)
 
     document.title = 'EduSIS | Home'
 
@@ -28,12 +29,6 @@ const Home = () => {
                 console.log('erro - ', e)
             }
         }
-        
-        setUser({
-            rm: localStorage.getItem("rm"),
-            email: localStorage.getItem("email"),
-            expiresIn: localStorage.getItem("expiresIn")
-        })
         
         fetchData()
     }, [])
@@ -54,7 +49,8 @@ const Home = () => {
         <>
         <Header />
         <main>
-            <NewsContainer img={foto} title={title} txt={txt}/>
+            {/* <NewsContainer img={foto} title={title} txt={txt}/> */}
+            <Carousel />
             <div className='div-section'>     
                 {
                     user ? <p>olá {user.email}</p> : ''
@@ -64,6 +60,10 @@ const Home = () => {
                             return <Card key={item.id} roomClass={item.name + ' - ' + item.serie + 'º ano'} room={item.id} classe={""}></Card>
                         }) : "tem nada aqui nao"
                 }       
+
+                {
+                    isAuth ? <h1>está autenticado</h1> : <h1>vish ta nada</h1>
+                }
             </div>
         </main>
         </>
